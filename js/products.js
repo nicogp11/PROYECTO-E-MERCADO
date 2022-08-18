@@ -18,7 +18,7 @@ function CargarProductos(lista) {
 
           <div class="col">
             <div class="d-flex w-100 justify-content-between">
-                <h4 class="mb-1">` + item.name +" - " + item.cost + item.currency + `</h4>
+                <h4 class="mb-1">` + item.name +" - " + item.currency + item.cost + item.currency + `</h4>
                 <small class="tex-muted">` + item.soldCount+ " vendidos" + `</h4>
                 </div>
                 <p class="mb-1">` + item.description+ `</p>

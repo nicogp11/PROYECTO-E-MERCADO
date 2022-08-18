@@ -1,3 +1,14 @@
+function redireccion() {
+
+
+    let usuario = JSON.parse(localStorage.getItem("item"))
+
+    if ( usuario == null ){
+        alert("Debe iniciar sesión")
+        location = "login.html"
+    }
+
+}
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
@@ -11,4 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+    
+    redireccion()
+
 });
