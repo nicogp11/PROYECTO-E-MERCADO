@@ -1,28 +1,19 @@
-function usuarioYContraseña(){
-let usuario = {}    
-usuario.mail = document.getElementById("mail").value
-usuario.contraseña = document.getElementById("password").value
+function usuarioYContraseña() {
+  
+  let mail = document.getElementById("mail").value;
+  let contraseña = document.getElementById("password").value;
 
-if (usuario.mail === ""||
-usuario.contraseña === ""
-)
-
+  if (mail === "" || contraseña === "") {
+    alert("Complete todos los campos");
+    location.href= "login.html";
+  } else {
+    localStorage.setItem("usuario", mail)
+    location.href="index.html";
+  }
 }
 
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
-
-document.addEventListener("click",function(){
-
-usuarioYContraseña
-
-
-})
-
-
-
-})
+  document.getElementById("ingresar").addEventListener("click", function () {
+    usuarioYContraseña();
+  });
+});
