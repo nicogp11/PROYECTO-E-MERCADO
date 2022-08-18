@@ -1,5 +1,5 @@
-const direccion =
-  "https://japceibal.github.io/emercado-api/cats_products/101.json";
+
+const DIRECCION="https://japceibal.github.io/emercado-api/cats_products/101.json";
 
 let Productoslist = [];
 
@@ -15,17 +15,13 @@ function CargarProductos(lista) {
           <div class="col-3">
             <img src="` + item.image +`" alt="` + item.description +`" class="img-thumbnail">
           </div>
-
           <div class="col">
             <div class="d-flex w-100 justify-content-between">
-                <h4 class="mb-1">` + item.name +" - " + item.currency + item.cost + item.currency + `</h4>
-                <small class="tex-muted">` + item.soldCount+ " vendidos" + `</h4>
-                </div>
-                <p class="mb-1">` + item.description+ `</p>
+              <h4 class="mb-1">` + item.name +" - " + item.currency + item.cost + item.currency + `</h4>
+              <small class="tex-muted">` + item.soldCount+ " vendidos" + `</h4>
+            </div>
+            <p class="mb-1">` + item.description+ `</p>
           </div>
-          
-          
-        
         </div>
       </div> 
           `;
@@ -34,7 +30,7 @@ function CargarProductos(lista) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetch(direccion)
+  fetch(DIRECCION)
     .then((response) => response.json())
     .then((datos) => {
       Productoslist = datos.products;
