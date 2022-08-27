@@ -1,5 +1,5 @@
 
-const DIRECCION="https://japceibal.github.io/emercado-api/cats_products/101.json";
+const DIRECCION="https://japceibal.github.io/emercado-api/cats_products/"+localStorage.getItem("catID")+".json";
 
 let Productoslist = [];
 

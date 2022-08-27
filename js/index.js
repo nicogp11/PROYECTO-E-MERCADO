@@ -10,6 +10,7 @@ function redireccion() {
 
 document.addEventListener("DOMContentLoaded", function(){
     redireccion()
+    document.getElementById("perfil").innerHTML=localStorage.getItem("usuario")
     document.getElementById("cerrarSesion").addEventListener("click", function() {
         localStorage.removeItem ("usuario");
         window.location = "login.html"
