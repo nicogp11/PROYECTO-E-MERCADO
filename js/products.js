@@ -17,7 +17,7 @@ function CargarProductos(lista) {
           </div>
           <div class="col">
             <div class="d-flex w-100 justify-content-between">
-              <h4 class="mb-1">` + item.name +" - " + item.currency +" "+ item.cost +" " + item.currency + `</h4>
+              <h4 class="mb-1">` + item.name +" - " + item.currency +" "+ item.cost + `</h4>
               <small class="tex-muted">` + item.soldCount+ " vendidos" + `</h4>
             </div>
             <p class="mb-1">` + item.description+ `</p>
@@ -25,8 +25,9 @@ function CargarProductos(lista) {
         </div>
       </div> 
           `;
-    document.getElementById("listado-categorias").innerHTML = textoenHTML;
+    
   }
+  document.getElementById("listado-categorias").innerHTML = textoenHTML;
 }
 
 document.addEventListener("DOMContentLoaded", function () {

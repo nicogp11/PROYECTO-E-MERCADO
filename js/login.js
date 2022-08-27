@@ -1,13 +1,13 @@
 function usuarioYContraseña() {
   
-  let mail = document.getElementById("mail").value;
+  let usuario = document.getElementById("usuario").value;
   let contraseña = document.getElementById("password").value;
 
-  if (mail === "" || contraseña === "") {
+  if (usuario === "" || contraseña === "") {
     alert("Complete todos los campos");
     location.href= "login.html";
   } else {
-    localStorage.setItem("usuario", mail)
+    localStorage.setItem("usuario", usuario)
     location.href="index.html";
   }
 }
