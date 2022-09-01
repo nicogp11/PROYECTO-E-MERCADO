@@ -32,7 +32,7 @@ function filtrar(lista) {
   min = document.getElementById("rangeFilterCountMin").value;
   max = document.getElementById("rangeFilterCountMax").value;
 
-  NuevaLista = lista.filter(item => item.cost > min && item.cost < max);
+  NuevaLista = lista.filter(item => item.cost >= min && item.cost <= max);
 
   CargarProductos(NuevaLista);
 }
