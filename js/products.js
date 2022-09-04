@@ -31,11 +31,13 @@ function CargarProductos(lista) {
 function filtrar(lista) {
   min = document.getElementById("rangeFilterCountMin").value;
   max = document.getElementById("rangeFilterCountMax").value;
-
+if(min ==""||max==""){
+  alert("completar ambos datos del filtro")
+}else{
   NuevaLista = lista.filter(item => item.cost >= min && item.cost <= max);
-
   CargarProductos(NuevaLista);
-}
+}}
+
 function ordenar(lista,criterio){
 
 if(criterio===Desc){
