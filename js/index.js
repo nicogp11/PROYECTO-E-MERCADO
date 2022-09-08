@@ -6,15 +6,18 @@ function redireccion() {
         location = "login.html"
     }
 }
-
-
-document.addEventListener("DOMContentLoaded", function(){
-    redireccion()
+function perfil(){
     document.getElementById("perfil").innerHTML=localStorage.getItem("usuario")
     document.getElementById("cerrarSesion").addEventListener("click", function() {
         localStorage.removeItem ("usuario");
         window.location = "login.html"
     });
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+    redireccion()
+    perfil()
+    
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"

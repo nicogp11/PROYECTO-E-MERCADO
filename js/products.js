@@ -7,12 +7,12 @@ let NuevaLista = [];
 let min = undefined;
 let max = undefined;
 
-function CargarProductos(lista) {
+function CargarProductos(lista){
   let textoenHTML = "";
 
   for (let item of lista) {
     textoenHTML +=
-    `<div class="list-group-item list-group-item-action cursor-active">
+    `<div onclick="setprodID(${item.id})" class="list-group-item list-group-item-action cursor-active">
       <div class="row">
         <div class="col-3"><img src="` +item.image +`" alt="` +item.description +`" class="img-thumbnail">
         </div>
@@ -27,17 +27,17 @@ function CargarProductos(lista) {
   }
   document.getElementById("listado-categorias").innerHTML = textoenHTML;
 }
-
-function filtrar(lista) {
+function filtrar(lista){
   min = document.getElementById("rangeFilterCountMin").value;
   max = document.getElementById("rangeFilterCountMax").value;
-if(min ==""||max==""){
-  alert("completar ambos datos del filtro")
-}else{
+if(min =="" && max==""){
+}else if(min !="" && max=="") {
+  NuevaLista = lista.filter(item => item.cost >= min && item.cost <= item.cost);
+  CargarProductos(NuevaLista);
+}else {
   NuevaLista = lista.filter(item => item.cost >= min && item.cost <= max);
   CargarProductos(NuevaLista);
 }}
-
 function ordenar(lista,criterio){
 
 if(criterio===Desc){
@@ -55,8 +55,36 @@ if(criterio===Desc){
 }
 CargarProductos(lista);  
 }
+function limpiar(){
+  NuevaLista = Productoslist
+  document.getElementById("rangeFilterCountMin").value = "";
+  document.getElementById("rangeFilterCountMax").value = "";
+    CargarProductos(NuevaLista);
+}
+function setprodID(id) {
+  localStorage.setItem("ProductID", id);
+  window.location = "product-info.html"
+}
+function redireccion() {
+  let usuario = localStorage.getItem("usuario")
+
+  if ( usuario == null ){
+      alert("Debe iniciar sesión")
+      location = "login.html"
+  }
+}
+function perfil(){
+  document.getElementById("perfil").innerHTML=localStorage.getItem("usuario")
+  document.getElementById("cerrarSesion").addEventListener("click", function() {
+      localStorage.removeItem ("usuario");
+      window.location = "login.html"
+  });
+}
 
 document.addEventListener("DOMContentLoaded", function () {
+  redireccion()
+  perfil()
+
   fetch(Direccion)
     .then((response) => response.json())
     .then((datos) => {
@@ -69,14 +97,12 @@ document.addEventListener("DOMContentLoaded", function () {
     filtrar(Productoslist);
   });
   document.getElementById("clearRangeFilter").addEventListener("click", function () {
-    NuevaLista = Productoslist
-    CargarProductos(NuevaLista);
+    limpiar()
   });
-  document.getElementById("OrdenPrecioDesc").addEventListener("click", function () {
-    ordenar(NuevaLista,Desc)
-
-  });  
   document.getElementById("OrdenPrecioAsc").addEventListener("click", function () {
+    ordenar(NuevaLista,Desc)
+  });  
+  document.getElementById("OrdenPrecioDesc").addEventListener("click", function () {
     ordenar(NuevaLista,Asc)
   });
   document.getElementById("OrdenRel").addEventListener("click", function () {
