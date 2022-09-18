@@ -1,4 +1,4 @@
-const Direccion =`https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
+const direccion =`https://japceibal.github.io/emercado-api/cats_products/${localStorage.getItem("catID")}.json`;
 const Asc = "Ascendente"
 const Desc = "Descendente"
 const Rel = "Relevancia"
@@ -61,6 +61,7 @@ function limpiar(){
   document.getElementById("rangeFilterCountMax").value = "";
     CargarProductos(NuevaLista);
 }
+//guarda el id del producto en el LocalStorage y redirige a product-info.html
 function setprodID(id) {
   localStorage.setItem("ProductID", id);
   window.location = "product-info.html"
@@ -85,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
   redireccion()
   perfil()
 
-  fetch(Direccion)
+  fetch(direccion)
     .then((response) => response.json())
     .then((datos) => {
       Productoslist = datos.products;

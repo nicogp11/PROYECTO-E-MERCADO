@@ -1,12 +1,9 @@
-const PRODUCT_INFO_URL = `https://japceibal.github.io/emercado-api/products/${localStorage.getItem(
-  "ProductID"
-)}.json`;
-const PRODUCT_INFO_COMMENTS_URL = `https://japceibal.github.io/emercado-api/products_comments/${localStorage.getItem(
-  "ProductID"
-)}.json`;
+const PRODUCT_INFO_URL = `https://japceibal.github.io/emercado-api/products/${localStorage.getItem("ProductID")}.json`;
+const PRODUCT_INFO_COMMENTS_URL = `https://japceibal.github.io/emercado-api/products_comments/${localStorage.getItem("ProductID")}.json`;
 let infoProducto = [];
 let comentProducto = [];
 
+//formatea la fecha del comentario ingresado
 function formatoFecha(){
   let fecha = new Date(Date.now())
   let año = fecha.getFullYear()
@@ -18,35 +15,36 @@ function formatoFecha(){
   return año +"-"+mes+"-"+dia+" "+hora+":"+minuto+":"+segundo;
 
 }
-
+//actualiza las estrellas en tiempo real dependiendo de en que estrella se encuentra el raton 
 function puntuarEstrellas(puntos) {
   let textoHtml = "";
   for (let i = 1; i <= 5; i++) {
     if (i <= puntos) {
-      textoHtml += `<i class="fas fa-star" onmousemove="puntuarEstrellas(${i})" id="estrSelec${i}" value="${puntos}"></i>`; //icono estrella llena
+      textoHtml += `<i class="fas fa-star" onmouseover="puntuarEstrellas(${i})" id="estrSelec${i}" value="${puntos}"></i>`; //icono estrella llena
     } else {
-      textoHtml += `<i class="far fa-star" onmousemove="puntuarEstrellas(${i})"value="${puntos}"></i>`; //icono contorno estrella
+      textoHtml += `<i class="far fa-star" onmouseover="puntuarEstrellas(${i})"value="${puntos}"></i>`; //icono contorno estrella
     }
   }
   document.getElementById("contenedorEstrella").innerHTML = textoHtml;
 }
-
+/*toma los datos ingresados para el comentario y si no estan vacios los carga a la lista ComentProductos,
+luego llama a la funcion cargarComentarios*/
 function ingresarComentario(){
   let nuevoComentario = {};
   nuevoComentario.product = localStorage.getItem("ProductID");
-  nuevoComentario.score = String(document.getElementById("estrSelec1").getAttribute("value"));
+  nuevoComentario.score = document.getElementById("estrSelec1").getAttribute("value");
   nuevoComentario.description = document.getElementById("nuevocoment").value;
   nuevoComentario.user = localStorage.getItem("usuario");
   nuevoComentario.dateTime = formatoFecha();
-  if (nuevoComentario != ""){
+  if (nuevoComentario !=""){
     comentProducto.push(nuevoComentario);
-
-    localStorage.setItem("comentarios", JSON.stringify(comentProducto));
     cargarComentarios();
-    console.debug(comentProducto);
+    document.getElementById("nuevocoment").value =""
+    puntuarEstrellas(0)
   }
 }
 
+//recibe una puntuación e itera comparandola con la variable "i" para ver si pone una estrella solida o regular
 function cargarEstrellas(puntos){
   let textoHtml = "";
   for (let i = 1; i <= 5; i++) {
@@ -59,8 +57,8 @@ function cargarEstrellas(puntos){
   return textoHtml;
 }
 
+//carga los datos de la variable comentProducto en el elemento con id="contenedorComentarios"
 function cargarComentarios(){
-  comentProducto = JSON.parse(localStorage.getItem("comentarios"));
   let textoHtml = "";
   for (let item of comentProducto) {
     textoHtml += `<ul class="list-group-sm>
@@ -69,8 +67,10 @@ function cargarComentarios(){
                     </ul>`;
   } 
   document.getElementById("contenedorComentarios").innerHTML = textoHtml;
+  puntuarEstrellas(0);
 }
 
+//recibe una lista con los datos de la pagina del producto y los carga en el Html en forma de "carrusel" 
 function cargarInfoProducto(obj){
   let textoHtml = `<div class="wrap">
     <div class="wrap-texto">
@@ -79,18 +79,16 @@ function cargarInfoProducto(obj){
       <h6>Descripción:       <span class="text-muted ">${obj.description}         </span></h6>
       <h6>Categoría:         <span class="text-muted ">${obj.category}            </span></h6>
       <h6>Cantidad vendidos: <span class="text-muted ">${obj.soldCount}           </span></h6>
-      <br><hr>
-      <h6><strong>COMENTARIOS</strong></h6><br><hr>
+      <hr>
+      <h6><strong>COMENTARIOS:</strong></h6>
       <div class="ajustepadding " id="contenedorComentarios">
       </div>
-      <h7><strong>COMENTAR</strong></h7>
       <input type="text" class="contenedorpequeño alinearizquierda" id="nuevocoment">
       <div id="contenedorEstrella">
       </div>
-      <button class="btn text-muted" id="ingresar">INGRESAR
+      <button class="btn btn-sm text-muted btn-outline-light" onclick="ingresarComentario()"><strong>COMENTAR</strong>
       </button>    
     </div>
-
     <div id="demo" class="carousel slide " data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
@@ -139,7 +137,6 @@ function perfil() {
       window.location = "login.html";
     });
 }
-
 document.addEventListener("DOMContentLoaded", function(){
   redireccion();
   perfil();
@@ -148,19 +145,12 @@ document.addEventListener("DOMContentLoaded", function(){
     .then((datos) => {
       infoProducto = datos;
       cargarInfoProducto(infoProducto);
-    });
-  fetch(PRODUCT_INFO_COMMENTS_URL)
-    .then((response) => response.json())
-    .then((datos2) => {
-      comentProducto = datos2;
-      localStorage.setItem("comentarios", JSON.stringify(comentProducto));
-      cargarInfoProducto(infoProducto);
-      cargarComentarios();
-      puntuarEstrellas(0);
-      document.getElementById("ingresar").addEventListener("click", function(){
-        ingresarComentario();
-    })
-    });
+  });
 
-  
+  fetch(PRODUCT_INFO_COMMENTS_URL)
+    .then((response)=>response.json())
+    .then((datos2)=>{
+      comentProducto=datos2;
+      cargarComentarios();      
+  });
 });
