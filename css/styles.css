@@ -191,14 +191,16 @@ a.custom-card:hover {
 .zoom {
   padding: 1px;
   background-color: black;
-  transition: transform .2s; /* Animation */
-  width: 50px;
-  height: 50px;
-  margin: 0 auto;
+  transition: transform .3s; /* Animation */
+  width: 200px;
+  height: 150px;
+  margin: 10px;
+  border-width: 10px;
+  border-color: #0087F7;
 }
 
 .zoom:hover {
-  transform: scale(1.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.12); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 .wrap{
   width: auto;
@@ -229,7 +231,7 @@ a.custom-card:hover {
 .ajustepadding{
   /*width: 350px;*/
   margin-right: 10px;
-  height: 300px;
+  height: 450px;
   overflow: auto;
   text-align: left;
 }
@@ -267,4 +269,20 @@ float:right ;
 }
 hr{
   margin: 1px;
+}
+.alinearcentro{
+  align-items:flex-end ;
+  padding: auto; 
+  }
+
+.correccionpadding{
+  padding:0px;
+}
+
+.colorseleccion{
+  background-color:#212529 ; 
+}
+
+.colorseleccion:hover{
+  background-color:#1d2022 ; 
 }

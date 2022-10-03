@@ -69,10 +69,14 @@ function cargarComentarios(){
   document.getElementById("contenedorComentarios").innerHTML = textoHtml;
   puntuarEstrellas(0);
 }
-
+function productoRelacionado(id){
+  localStorage.setItem("ProductID", id);
+  window.location = "product-info.html"
+}
 //recibe una lista con los datos de la pagina del producto y los carga en el Html en forma de "carrusel" 
 function cargarInfoProducto(obj){
-  let textoHtml = `<div class="wrap">
+  let textoHtml = `
+  <div class="wrap">
     <div class="wrap-texto">
       <h2><strong>${obj.name}</strong></h2><br><hr>
       <h6>Precio:            <span class="text-muted ">${obj.currency} ${obj.cost}</span></h6>
@@ -87,15 +91,9 @@ function cargarInfoProducto(obj){
       <div id="contenedorEstrella">
       </div>
       <button class="btn btn-sm text-muted btn-outline-light" onclick="ingresarComentario()"><strong>COMENTAR</strong>
-      </button>    
+      </button> 
     </div>
-    <div id="demo" class="carousel slide " data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-        <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
-      </div>
+    <div id="demo" class="carousel slide " data-bs-ride="carousel"> 
       <div class="carousel-inner ajustesize " >
         <div class="carousel-item active">
           <img src="${obj.images[0]}" alt="0" class="d-block w-100">
@@ -109,48 +107,48 @@ function cargarInfoProducto(obj){
         <div class="carousel-item">
           <img src="${obj.images[3]}" alt="3" class="d-block w-100">
         </div>
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+        </div>
+          <button class="carousel-control-prev " type="button" data-bs-target="#demo" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon blackcolor"></span>
+          </button>
+          <button class="carousel-control-next " type="button" data-bs-target="#demo" data-bs-slide="next">
+          <span class="carousel-control-next-icon blackcolor"></span>
+          </button>
       </div>
-      <button class="carousel-control-prev " type="button" data-bs-target="#demo" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon blackcolor"></span>
-      </button>
-      <button class="carousel-control-next " type="button" data-bs-target="#demo" data-bs-slide="next">
-        <span class="carousel-control-next-icon blackcolor"></span>
-      </button>
-    </div>`;
+      <div class="alinearcentro">
+        <h6 class="text-muted hr"><strong>PRODUCTOS RELACIONADOS:</strong></h6>
+        <div class="zoom alinearizquierda blackcolor" >
+          <span class="text-muted ">${obj.relatedProducts[0].name}</span>
+          <img src="${obj.relatedProducts[0].image}" onclick="productoRelacionado(${obj.relatedProducts[0].id})" alt="0" class="d-block w-100">
+        </div>
+        <div class="zoom alinearizquierda blackcolor" >
+          <span class="text-muted ">${obj.relatedProducts[1].name}</span>
+          <img src="${obj.relatedProducts[1].image}" onclick="productoRelacionado(${obj.relatedProducts[1].id})" alt="0" class="d-block w-100">
+        </div>
+      </div>
+    </div> 
+  </div>`;
   document.getElementById("infoProducto").innerHTML = textoHtml;
-}
-
-function redireccion() {
-  let usuario = localStorage.getItem("usuario");
-
-  if (usuario == null) {
-    alert("Debe iniciar sesión");
-    location = "login.html";
-  }
-}
-function perfil() {
-  document.getElementById("perfil").innerHTML = localStorage.getItem("usuario");
-  document
-    .getElementById("cerrarSesion")
-    .addEventListener("click", function () {
-      localStorage.removeItem("usuario");
-      window.location = "login.html";
-    });
+  cargarComentarios(); 
 }
 document.addEventListener("DOMContentLoaded", function(){
-  redireccion();
-  perfil();
   fetch(PRODUCT_INFO_URL)
     .then((response) => response.json())
     .then((datos) => {
       infoProducto = datos;
-      cargarInfoProducto(infoProducto);
-  });
-
-  fetch(PRODUCT_INFO_COMMENTS_URL)
+    
+      
+      fetch(PRODUCT_INFO_COMMENTS_URL)
     .then((response)=>response.json())
     .then((datos2)=>{
       comentProducto=datos2;
-      cargarComentarios();      
+      cargarInfoProducto(infoProducto);     
   });
+  });
+  
 });

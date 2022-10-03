@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <script src="js/index.js"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -43,7 +44,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -51,12 +52,14 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a id="perfil" class="nav-link active" href="my-profile.html"></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="cerrarSesion">Cerrar Sesión</a>
-          </li>
+          <div class="dropdown ">
+            <li class="dropdown-toggle text-muted nav-link" data-bs-toggle="dropdown" id="perfil"></li>
+            <ul class="dropdown-menu w-100 correccionpadding">
+              <li><a class="dropdown-item nav-link blackcolor colorseleccion" href="my-profile.html">Mi perfil</a></li>
+              <li><a class="dropdown-item nav-link blackcolor colorseleccion" href="cart.html">Mi carrito</a></li>
+              <li><a id="cerrarSesion" class="dropdown-item nav-link blackcolor colorseleccion">Cerrar Sesión</a></li>
+            </ul>
+          </div>            
         </ul>
       </div>
     </div>

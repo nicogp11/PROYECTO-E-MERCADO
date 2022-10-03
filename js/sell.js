@@ -23,29 +23,10 @@ function updateTotalCosts(){
     comissionCostHTML.innerHTML = comissionToShow;
     totalCostHTML.innerHTML = totalCostToShow;
 }
-
-function redireccion() {
-    let usuario = localStorage.getItem("usuario")
-  
-    if ( usuario == null ){
-        alert("Debe iniciar sesión")
-        location = "login.html"
-    }
-  }
-  function perfil(){
-    document.getElementById("perfil").innerHTML=localStorage.getItem("usuario")
-    document.getElementById("cerrarSesion").addEventListener("click", function() {
-        localStorage.removeItem ("usuario");
-        window.location = "login.html"
-    });
-  }
-
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    redireccion()
-    perfil()
     document.getElementById("productCountInput").addEventListener("change", function(){
         productCount = this.value;
         updateTotalCosts();
