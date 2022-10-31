@@ -2,7 +2,7 @@ const PRODUCT_INFO_URL = `https://japceibal.github.io/emercado-api/products/${lo
 const PRODUCT_INFO_COMMENTS_URL = `https://japceibal.github.io/emercado-api/products_comments/${localStorage.getItem("ProductID")}.json`;
 let infoProducto = [];
 let comentProducto = [];
-
+let carrito = [];
 //formatea la fecha del comentario ingresado
 function formatoFecha(){
   let fecha = new Date(Date.now())
@@ -73,16 +73,39 @@ function productoRelacionado(id){
   localStorage.setItem("ProductID", id);
   window.location = "product-info.html"
 }
+function anadirAlCarrito(id,unitCost){
+  let articulo = {}
+  articulo.id = id
+  articulo.name = document.getElementById("idprod").innerHTML
+  articulo.count = 1
+  articulo.unitCost = unitCost
+  articulo.currency = document.getElementById("currency").innerHTML.slice(0,4)
+  articulo.image = document.getElementById("imgtocart").src
+ console.log(articulo)
+  if (localStorage.getItem("carrito")!=null){
+    carrito = JSON.parse(localStorage.getItem("carrito"));
+    carrito.push(articulo);
+    localStorage.setItem("carrito",JSON.stringify(carrito));
+    location.href="cart.html";
+  }else{
+    carrito.push(articulo);
+    localStorage.setItem("carrito",JSON.stringify(carrito));
+    location.href="cart.html";
+}
+}
+
 //recibe una lista con los datos de la pagina del producto y los carga en el Html en forma de "carrusel" 
 function cargarInfoProducto(obj){
   let textoHtml = `
   <div class="wrap">
     <div class="wrap-texto">
-      <h2><strong>${obj.name}</strong></h2><br><hr>
-      <h6>Precio:            <span class="text-muted ">${obj.currency} ${obj.cost}</span></h6>
-      <h6>Descripción:       <span class="text-muted ">${obj.description}         </span></h6>
-      <h6>Categoría:         <span class="text-muted ">${obj.category}            </span></h6>
-      <h6>Cantidad vendidos: <span class="text-muted ">${obj.soldCount}           </span></h6>
+      <h2><strong id="idprod">${obj.name}</strong></h2>
+      <button type="button" class="btn btn-success my-3" onclick="anadirAlCarrito(${obj.id},${obj.cost})">Añadir al carrito</button>
+      <br><hr>
+      <h6>Precio:            <span class="text-muted" id="currency">${obj.currency} ${obj.cost}</span></h6>
+      <h6>Descripción:       <span class="text-muted">${obj.description}         </span></h6>
+      <h6>Categoría:         <span class="text-muted">${obj.category}            </span></h6>
+      <h6>Cantidad vendidos: <span class="text-muted">${obj.soldCount}           </span></h6>
       <hr>
       <h6><strong>COMENTARIOS:</strong></h6>
       <div class="ajustepadding " id="contenedorComentarios">
@@ -96,7 +119,7 @@ function cargarInfoProducto(obj){
     <div id="demo" class="carousel slide " data-bs-ride="carousel"> 
       <div class="carousel-inner ajustesize " >
         <div class="carousel-item active">
-          <img src="${obj.images[0]}" alt="0" class="d-block w-100">
+          <img src="${obj.images[0]}" alt="0" class="d-block w-100" id="imgtocart">
         </div>
         <div class="carousel-item">
           <img src="${obj.images[1]}" alt="1" class="d-block w-100">
