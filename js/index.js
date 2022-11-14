@@ -6,8 +6,10 @@ function redireccion() {
         location = "login.html"
     }
 }
+
 function perfil(){
-    document.getElementById("perfil").innerHTML=localStorage.getItem("usuario")
+    let usuario = JSON.parse(localStorage.getItem("usuario"))
+    document.getElementById("perfil").innerHTML=usuario.mail
     document.getElementById("cerrarSesion").addEventListener("click", function() {
         localStorage.removeItem ("usuario");
         window.location = "login.html"

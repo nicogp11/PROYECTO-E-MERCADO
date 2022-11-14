@@ -33,7 +33,7 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <div class="dropdown ">
-            <li class="dropdown-toggle text-muted nav-link" data-bs-toggle="dropdown" id="perfil"></li>
+            <li class="dropdown-toggle nav-link" data-bs-toggle="dropdown" id="perfil"></li>
             <ul class="dropdown-menu w-100 correccionpadding">
               <li><a class="dropdown-item nav-link blackcolor colorseleccion" href="my-profile.html">Mi perfil</a></li>
               <li><a class="dropdown-item nav-link blackcolor colorseleccion" href="cart.html">Mi carrito</a></li>
@@ -60,7 +60,6 @@
     <br>
     <div class="container">
       <form action="#" method="get" class="row mt-4 needs-validation" novalidate>
-
         <hr class="mb-4">
         <h5 class="mb-3">Tipo de envío</h5>
         <div class="d-block my-3">
@@ -129,16 +128,12 @@
             </div>
         </div>
 
-
         <div class="container">
           <div class="row">
             <button class="btn btn-primary btn-lg" onclick="validacionMetodoPago()" type="submit">Finalizar la compra</button>
             
           </div>
         </div>
-
-
-
 
         <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
           <div class="modal-dialog" role="document">
@@ -214,7 +209,7 @@
                     <div class="conteiner">
                       <div class="row">
                         <div class="col-sm-5">
-                          <input type="text" placeholder="N° cuenta" class="form-control trans" id="numerocuenta" disabled required>
+                          <input type="number" placeholder="N° cuenta" class="form-control trans" id="numerocuenta" disabled required>
                         </div>
       
                       </div>
@@ -229,14 +224,8 @@
             </div>
           </div>
         </div>
-
-
-
-
-
       </form>
     </div>
-
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -248,9 +237,6 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-
-
-  
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

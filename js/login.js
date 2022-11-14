@@ -2,18 +2,17 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/25801.
 let carrito = []
 
 
-function usuarioYContraseña() {
-  
-  let usuario = document.getElementById("usuario").value;
-  let contraseña = document.getElementById("password").value;
+function usuario() { 
+  let usuario = {}
+  usuario.nombre = ""
+  usuario.segNombre = ""
+  usuario.apellido = ""
+  usuario.segApellido = ""
+  usuario.mail = document.getElementById("usuario").value;
+  usuario.telefono = ""
 
-  if (usuario === "" || contraseña === "") {
-    alert("Complete todos los campos");
-    location.href= "login.html";
-  } else {
-    localStorage.setItem("usuario", usuario)
-    location.href="index.html";
-  }
+  localStorage.setItem("usuario",JSON.stringify(usuario))
+  location.href="index.html";
 }
 
 function cargarCarrito(){
@@ -22,6 +21,7 @@ function cargarCarrito(){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
   fetch(CART_INFO_URL)
       .then((response) => response.json())
       .then((datos) => {
@@ -29,10 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
         
         cargarCarrito()
         });
-    
-  document.getElementById("ingresar").addEventListener("click", function () {
-    
-    usuarioYContraseña();
-
-  });
+  document.getElementById("ingresar").addEventListener("click",
+            function (event) {
+              if (!form.checkValidity()){
+                event.preventDefault();
+                event.stopPropagation();
+              }else{
+                usuario() 
+              }
+              document.body.classList.add("was-validated");
+          }, false)
 });

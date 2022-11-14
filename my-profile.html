@@ -9,6 +9,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <script src="js/index.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -53,7 +54,7 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <div class="dropdown ">
-            <li class="dropdown-toggle text-muted nav-link" data-bs-toggle="dropdown" id="perfil"></li>
+            <li class="dropdown-toggle nav-link" data-bs-toggle="dropdown" id="perfil"></li>
             <ul class="dropdown-menu w-100 correccionpadding">
               <li><a class="dropdown-item nav-link blackcolor colorseleccion" href="my-profile.html">Mi perfil</a></li>
               <li><a class="dropdown-item nav-link blackcolor colorseleccion" href="cart.html">Mi carrito</a></li>
@@ -65,11 +66,53 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="text-center p-4">
+      <h2>Mi perfil</h2>
+      <hr class="mb-4">
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-8 order-md-1">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="productName">Nombre*</label>
+              <input type="text" class="form-control" id="nombre">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="productName">Segundo nombre</label>
+              <input type="text" class="form-control" id="segNombre">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="productName">Apellido*</label>
+              <input type="text" class="form-control" id="apellido">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="productName">Segundo apellido</label>
+              <input type="text" class="form-control" id="segApellido">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="productName">E-mail*</label>
+              <input type="text" class="form-control" id="mail">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="productName">Teléfono de contacto</label>
+              <input type="text" class="form-control" id="telefono">
+            </div>
+          </div>
+          <div class="row">
+          <button class="btn btn-primary btn-md" type="submit" id="guardar">Guardar cambios</button>
+        </div>
       </div>
     </div>
+
+
+
+
+
+
   </main>
   <footer class="text-muted">
     <div class="container">

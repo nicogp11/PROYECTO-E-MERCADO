@@ -27,6 +27,7 @@ function CargarProductos(lista){
   }
   document.getElementById("listado-categorias").innerHTML = textoenHTML;
 }
+
 function filtrar(lista){
   min = document.getElementById("rangeFilterCountMin").value;
   max = document.getElementById("rangeFilterCountMax").value;
@@ -38,6 +39,7 @@ if(min =="" && max==""){
   NuevaLista = lista.filter(item => item.cost >= min && item.cost <= max);
   CargarProductos(NuevaLista);
 }}
+
 function ordenar(lista,criterio){
 
 if(criterio===Desc){
@@ -55,17 +57,20 @@ if(criterio===Desc){
 }
 CargarProductos(lista);  
 }
+
 function limpiar(){
   NuevaLista = Productoslist
   document.getElementById("rangeFilterCountMin").value = "";
   document.getElementById("rangeFilterCountMax").value = "";
     CargarProductos(NuevaLista);
 }
+
 //guarda el id del producto en el LocalStorage y redirige a product-info.html
 function setprodID(id) {
   localStorage.setItem("ProductID", id);
   window.location = "product-info.html"
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   fetch(direccion)
     .then((response) => response.json())

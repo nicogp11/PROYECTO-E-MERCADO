@@ -13,7 +13,7 @@ function cambiarCant(i) {
   cargarCarrito();
 }
 
-function borrarArticulo(pos) {
+function borrarArticulo(pos){
   let carrito = JSON.parse(localStorage.getItem("carrito"));
   carrito.splice(pos, 1);
   localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -63,17 +63,16 @@ function actualizarCosto(){
   let subtotal = 0;
   let costoEnvio = 0;
   let costoTotal = 0;
-  let moneda= "USD "
+  let moneda= "USD"
   for (let articulo of carrito) {
-    console.log(articulo.currency==moneda)
-    if (articulo.currency ==moneda){
+    if (articulo.currency == moneda){
       subtotal += articulo.count * articulo.unitCost; 
     }else{
       subtotal += articulo.count * articulo.unitCost/41;    
     }
   }
   costoEnvio = subtotal * comisionEnvio;
-  costoTotal = subtotal+costoEnvio
+  costoTotal = subtotal + costoEnvio
   document.getElementById("subtotal").innerHTML = "USD " + Math.round(subtotal);
   document.getElementById("costoEnvio").innerHTML = "USD " + Math.round(costoEnvio);
   document.getElementById("costoTotal").innerHTML = "USD " + Math.round(costoTotal);
@@ -130,13 +129,6 @@ function validacionMetodoPago(){
   document.getElementById("numerocuenta").setAttribute("onchange","validacionMetodoPago()");
   document.getElementById("cerrar").setAttribute("oneclick","validacionMetodoPago()");
   
-  /*if (validacion == true) {
-    document.getElementById("formaDepago").removeAttribute("class","invalid-color");
-    document.getElementById("feedback-formapago").style.display = "none";
-  } else {
-    document.getElementById("formaDepago").setAttribute("class","invalid-color");
-    document.getElementById("feedback-formapago").style.display = "inline";
-}*/
 }
 document.addEventListener("DOMContentLoaded", function () {
   cargarCarrito();

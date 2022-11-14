@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function(e){
         updateTotalCosts();
     });
 
-
     //Configuraciones para el elemento que sube archivos
     let dzoptions = {
         url:"/",
@@ -73,27 +72,22 @@ document.addEventListener("DOMContentLoaded", function(e){
     };
     let myDropzone = new Dropzone("div#file-upload", dzoptions);    
 
-
     //Se obtiene el formulario de publicación de producto
     let sellForm = document.getElementById("sell-info");
 
     //Se agrega una escucha en el evento 'submit' que será
     //lanzado por el formulario cuando se seleccione 'Vender'.
     sellForm.addEventListener("submit", function(e){
-
         e.preventDefault(); 
         e.preventDefault();
-
         let productNameInput = document.getElementById("productName");
         let productCategory = document.getElementById("productCategory");
         let productCost = document.getElementById("productCostInput");
         let infoMissing = false;
-
         //Quito las clases que marcan como inválidos
         productNameInput.classList.remove('is-invalid');
         productCategory.classList.remove('is-invalid');
         productCost.classList.remove('is-invalid');
-
         //Se realizan los controles necesarios,
         //En este caso se controla que se haya ingresado el nombre y categoría.
         //Consulto por el nombre del producto
