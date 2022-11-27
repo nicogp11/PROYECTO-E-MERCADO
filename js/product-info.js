@@ -34,7 +34,7 @@ function ingresarComentario(){
   nuevoComentario.product = localStorage.getItem("ProductID");
   nuevoComentario.score = document.getElementById("estrSelec1").getAttribute("value");
   nuevoComentario.description = document.getElementById("nuevocoment").value;
-  nuevoComentario.user = localStorage.getItem("usuario");
+  nuevoComentario.user = localStorage.getItem("usuario").nombre;
   nuevoComentario.dateTime = formatoFecha();
   if (nuevoComentario !=""){
     comentProducto.push(nuevoComentario);
